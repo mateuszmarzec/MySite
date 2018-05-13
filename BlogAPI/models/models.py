@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.timezone import now
+from datetime import datetime
 
 
 class Tag(models.Model):
@@ -17,8 +17,8 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     slug = models.SlugField(primary_key=True)
     tags = models.ManyToManyField(Tag)
-    create_time = models.DateTimeField(default=now())
-    release_time = models.DateTimeField(default=now())
+    create_time = models.DateTimeField(default=datetime.now())
+    release_time = models.DateTimeField(default=datetime.now())
     text = models.CharField(max_length=2000)
     thumbnail = models.ImageField(null=True, blank=True)
 
