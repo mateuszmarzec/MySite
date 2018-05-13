@@ -1,0 +1,14 @@
+{% load static %}
+
+<div class="container">
+    <div class="nav-scroller py-1 mb-2">
+            <nav class="nav d-flex justify-content-between">
+                {% for item in menu %}
+                <a class="p-2 text-muted" href="{% url item.view_name %}">{{ item.name }}</a>
+                {% endfor %}
+                <a class="p-2 text-muted" href="http://www.facebook.com">Facebook</a>
+                <a class="p-2 text-muted" href="http://www.twitter.com">Twitter</a>
+                <a class="p-2 text-muted" href="http://www.twitch.com">Twitch</a>
+            </nav>
+    </div>
+</div>
