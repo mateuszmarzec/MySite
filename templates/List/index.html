@@ -4,7 +4,11 @@
 
     {% block content %}
 
-        {% include 'List/main_post.html' %}
+        {% if post_list.first %}
+
+            {% include 'List/main_post.html' %}
+
+        {% endif %}
 
         {% include 'List/posts_list.html' %}
 
