@@ -1,14 +1,23 @@
+import factory
+
 from BlogAPI.models.models import Post, Tag
-from factory.django import DjangoModelFactory
 
 
-class PostFactory(DjangoModelFactory):
-    class Meta:
-        model = Post
-        django_get_or_create = ('title', 'slug', 'tags', 'create_time', 'release_time', 'text',)
-
-
-class TagFactory(DjangoModelFactory):
+class TagFactory(factory.DjangoModelFactory):
     class Meta:
         model = Tag
-        django_get_or_create = ('name',)
+
+    name = 'test_name'
+
+
+class PostFactory(factory.DjangoModelFactory):
+    class Meta:
+        model = Post
+
+    title = 'test_title'
+    slug = 'test-slug'
+    text = 'test_text'
+
+    @factory.post_generation
+    def set_tags(self, *args, **kwargs):
+        self.tags.set(Tag.objects.all())
