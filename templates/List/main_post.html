@@ -5,7 +5,7 @@
           <h1 class="display-4 font-italic">{{ post_list.first.title }}</h1>
           <p class="lead my-3">
               {% if post_list.first.text|length > 250 %}
-                  {{ post_list.first.text|slice:":250"|add:'...' }}
+                  {{ post_list.first.text|slice:":250"|add:'...'|linebreaks }}
               {% else %}
                   {{ post_list.first.text }}
               {% endif %}
