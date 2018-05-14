@@ -10,7 +10,7 @@
                 {{ post.title }}
               </h3>
               <div class="mb-1 text-muted">{{ post.create_time|date:'M d D H:i' }}</div>
-              <p class="card-text mb-auto">{% if post.text|length > 350 %}{{ post.text|slice:":350"|add:'...'|linebreaks }}{% else %}{{ post.text|linebreaks }}{% endif %}</p>
+              <p class="card-text mb-auto">{% if post.text|length > 350 %}{{ post.text|slice:":350"|add:'...' }}{% else %}{{ post.text|linebreaks }}{% endif %}</p>
               <a href="{% url 'post-view' post.slug %}">Czytaj dalej</a>
             </div>
             {% if post.thumbnail %}<img class="card-img-right flex-auto d-none d-lg-block" data-src="#" data-holder-rendered="true" style="width: 200px; height: 250px;">{% endif %}
