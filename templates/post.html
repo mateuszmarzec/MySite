@@ -11,7 +11,7 @@
                     <div class="blog-post">
                         <h2 class="blog-post-title">{{ post_title }}</h2>
                         <p class="blog-post-meta">{{ post_create_time|date:'M d D H:i' }}</p>
-                        <p class="card-text mb-auto">{{ post_text }}</p>
+                        <p class="card-text mb-auto">{{ post_text|linebreaks }}</p>
                     </div>
                 </div>
               </div>
