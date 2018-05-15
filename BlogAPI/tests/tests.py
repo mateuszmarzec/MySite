@@ -1,5 +1,5 @@
-from django.utils import timezone
 from django.test import Client, TestCase
+from django.utils import timezone
 
 from BlogAPI.tests import factory
 
@@ -34,4 +34,7 @@ class PostViewTestCase(BaseTestCase):
 
 
 class IndexViewTestCase(BaseTestCase):
-    pass
+    def test_get_posts_non_empty_list(self):
+        response = self.client.get('')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'List/index.html')

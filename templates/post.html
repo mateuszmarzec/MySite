@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-    {% block title %}{{ post_title }}{% endblock %}
+    {% block title %}{{ post.title }}{% endblock %}
 
     {% block content %}
     <div class="row mb-2">
@@ -9,9 +9,9 @@
                 <div class="card-body d-flex flex-column align-items-start">
                     <strong class="d-inline-block mb-2 text-success">{% for tag in tags %}{{ tag.name|capfirst}} {% endfor %}</strong>
                     <div class="blog-post">
-                        <h2 class="blog-post-title">{{ post_title }}</h2>
-                        <p class="blog-post-meta">{{ post_create_time|date:'M d D H:i' }}</p>
-                        <p class="card-text mb-auto">{{ post_text|linebreaks }}</p>
+                        <h2 class="blog-post-title">{{ post.title }}</h2>
+                        <p class="blog-post-meta">{{ post.create_time|date:'M d D H:i' }}</p>
+                        <p class="card-text mb-auto">{{ post.text|linebreaks }}</p>
                     </div>
                 </div>
               </div>
