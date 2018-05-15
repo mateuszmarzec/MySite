@@ -27,4 +27,4 @@ class Post(models.Model):
         verbose_name_plural = 'Posty'
 
     def __str__(self):
-        return '{} {}'.format(self.title, self.create_time)
+        return '{} {} {} {}'.format(self.title, self.slug,  self.create_time, self.release_time)

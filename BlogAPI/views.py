@@ -23,10 +23,8 @@ class PostView(TemplateView):
         post = get_object_or_404(Post, slug=kwargs.get('slug'), release_time__lte=now())
         tags = Tag.objects.filter(post=post)
         context.update({
-            'post_title': post.title,
-            'post_create_time': post.create_time,
-            'post_text': post.text,
-            'tags': tags
+            'post': post,
+            'tags': tags,
         })
         return context
 
