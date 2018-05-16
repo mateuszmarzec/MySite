@@ -10,7 +10,7 @@
                   <h3 class="mb-0">
                       {{ post.title }}
                   </h3>
-                  <div class="mb-1 text-muted">{{ post.create_time|date:'M d D H:i' }}</div>
+                  <div class="mb-1 text-muted" id="post-date">{{ post.create_time|date:'M d D H:i' }}</div>
                   <p class="card-text mb-auto">{% if post.text|length > 350 %}{{ post.text|slice:":350"|add:'...'|linebreaks }}{% else %}{{ post.text|linebreaks }}{% endif %}</p>
                   <a href="{% url 'post-view' post.slug %}">Czytaj dalej</a>
                 </div>
