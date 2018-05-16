@@ -6,7 +6,7 @@ from BlogAPI.models.models_site import Menu
 
 
 class TagAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {'slug': ('name',)}
 
 
 class PostAdmin(admin.ModelAdmin):

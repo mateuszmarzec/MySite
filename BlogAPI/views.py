@@ -1,4 +1,4 @@
-
+# coding=utf-8
 from django.views.generic import ListView, TemplateView
 from django.shortcuts import get_object_or_404
 from django.utils.timezone import now
@@ -6,12 +6,17 @@ from django.utils.timezone import now
 from BlogAPI.models.models import Post, Tag
 
 
-class IndexView(ListView):
+class IndexView(TemplateView):
     name = 'index-view'
     template_name = 'List/index.html'
 
-    def get_queryset(self):
-        return Post.objects.filter(release_time__lte=now()).order_by('create_time').reverse()[:5]
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context.update({
+            'post_list': Post.objects.filter(release_time__lte=now())[:5],
+            'tag_list': Tag.objects.all(),
+        })
+        return context
 
 
 class PostView(TemplateView):
@@ -34,4 +39,13 @@ class ArchiveView(ListView):
     template_name = 'Archiwum/archive.html'
 
     def get_queryset(self):
-        return Post.objects.filter(release_time__lte=now()).order_by('create_time').reverse()
+        return Post.objects.filter(release_time__lte=now())
+
+
+class TagSortingView(ListView):
+    name = 'tag_sorting-view'
+    template_name = 'Archiwum/archive.html'
+
+    def get_queryset(self):
+        tag = get_object_or_404(Tag, name=self.kwargs.get('tag'))
+        return Post.objects.filter(release_time__lte=now(), tags=tag)

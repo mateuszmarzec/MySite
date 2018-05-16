@@ -6,4 +6,12 @@
             <p class="mb-0">Mam na imię Mateusz, z wykształcenia i zawodu programista. Pracuje jako Python Developer, technologie webowe.
                 Interesuje się piłką nożną, koszykówką, esportem, nowymi technologiami oraz polityką. W wolnych chwilach, rozwijam tą stronę i czytam książki.</p>
           </div>
+        <div class="p-3">
+                <h4 class="font-italic">Tagi</h4>
+                <ol class="list-unstyled mb-0">
+                    {% for tag in tag_list %}
+                        <li><a href="{% url 'tag_sorting-view' tag.slug %}">{{ tag.name }}</a></li>
+                    {% endfor %}
+                </ol>
+        </div>
 </aside>

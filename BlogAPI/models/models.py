@@ -4,6 +4,7 @@ from django.utils.timezone import now
 
 class Tag(models.Model):
     name = models.CharField(max_length=20, unique=True)
+    slug = models.SlugField(max_length=20, unique=True)
 
     class Meta:
         verbose_name = 'Tag'
@@ -23,8 +24,9 @@ class Post(models.Model):
     thumbnail = models.ImageField(null=True, blank=True)
 
     class Meta:
+        ordering = ['-create_time']
         verbose_name = 'Post'
         verbose_name_plural = 'Posty'
 
     def __str__(self):
-        return '{} {} {} {}'.format(self.title, self.slug,  self.create_time, self.release_time)
+        return '{} {}'.format(self.title, self.slug)
