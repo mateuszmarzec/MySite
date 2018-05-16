@@ -8,7 +8,7 @@ from BlogAPI.models.models import Post, Tag
 
 class IndexView(TemplateView):
     name = 'index-view'
-    template_name = 'List/index.html'
+    template_name = 'Index/index.html'
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -36,7 +36,7 @@ class PostView(TemplateView):
 
 class ArchiveView(ListView):
     name = 'archive-view'
-    template_name = 'Archiwum/archive.html'
+    template_name = 'List/index_list.html'
 
     def get_queryset(self):
         return Post.objects.filter(release_time__lte=now())
@@ -44,8 +44,8 @@ class ArchiveView(ListView):
 
 class TagSortingView(ListView):
     name = 'tag_sorting-view'
-    template_name = 'Archiwum/archive.html'
+    template_name = 'List/index_list.html'
 
     def get_queryset(self):
-        tag = get_object_or_404(Tag, name=self.kwargs.get('tag'))
+        tag = get_object_or_404(Tag, slug=self.kwargs.get('tag'))
         return Post.objects.filter(release_time__lte=now(), tags=tag)

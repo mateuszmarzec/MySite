@@ -35,7 +35,7 @@ class PostViewTestCase(BaseTestCase):
 
 
 class IndexViewTestCase(BaseTestCase):
-    template = 'List/index.html'
+    template = 'Index/index.html'
     path = ''
 
     def test_get_posts_non_empty_list(self):
@@ -61,7 +61,7 @@ class IndexViewTestCase(BaseTestCase):
 
 
 class ArchiveViewTestCase(IndexViewTestCase):
-    template = 'Archiwum/archive.html'
+    template = 'List/index_list.html'
     path = '/archiwum'
 
 
