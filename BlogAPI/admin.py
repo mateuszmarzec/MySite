@@ -18,7 +18,7 @@ class PostAdmin(admin.ModelAdmin):
 
 class MenuAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
-    list_display = ('name', 'slug', 'view_name')
+    list_display = ('name', 'slug', 'view_name', 'position')
 
 
 admin.site.register(Tag, TagAdmin)
