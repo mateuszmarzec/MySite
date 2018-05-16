@@ -29,4 +29,9 @@ class PostView(TemplateView):
         return context
 
 
+class ArchiveView(ListView):
+    name = 'archive-view'
+    template_name = 'Archiwum/archive.html'
 
+    def get_queryset(self):
+        return Post.objects.filter(release_time__lte=now()).order_by('create_time').reverse()
