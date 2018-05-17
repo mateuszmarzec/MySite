@@ -52,7 +52,7 @@ class IndexViewTestCase(BaseTestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, self.template)
 
-    def test_get_posts_only_not_released_posts(self):
+    def test_get_posts_only_not_released_posts_empty_list(self):
         Post.objects.get(slug='test-slug').delete()
         response = self.client.get(self.path)
         self.assertQuerysetEqual(response.context['post_list'], [])
@@ -65,3 +65,24 @@ class ArchiveViewTestCase(IndexViewTestCase):
     path = '/archiwum'
 
 
+class TagSortingViewTestCase(IndexViewTestCase):
+    template = 'List/index_list.html'
+    path = '/tag/test-slug'
+
+    def setUp(self):
+        self.test_tag = factory.TagFactory.create(name='test_tag', slug='test-tag')
+        super(TagSortingViewTestCase, self).setUp()
+
+    def test_get_posts_non_empty_list_with_proper_tag(self):
+        response = self.client.get(self.path)
+        query = Post.objects.filter(release_time__lte=timezone.now(), tags=self.tag)
+        self.assertQuerysetEqual(response.context['post_list'], [repr(q) for q in query])
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, self.template)
+
+    def test_get_posts_empty_list(self):
+        self.path = '/tag/test-tag'
+        response = self.client.get(self.path)
+        self.assertQuerysetEqual(response.context['post_list'], [])
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, self.template)

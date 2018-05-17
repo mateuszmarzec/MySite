@@ -8,6 +8,7 @@ class TagFactory(factory.DjangoModelFactory):
         model = Tag
 
     name = 'test_name'
+    slug = 'test-slug'
 
 
 class PostFactory(factory.DjangoModelFactory):
@@ -20,4 +21,4 @@ class PostFactory(factory.DjangoModelFactory):
 
     @factory.post_generation
     def set_tags(self, *args, **kwargs):
-        self.tags.set(Tag.objects.all())
+        self.tags.set(Tag.objects.filter(slug='test-slug'))
