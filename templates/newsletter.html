@@ -3,13 +3,29 @@
     {% block title %}Newsletter{% endblock %}
 
     {% block content %}
-    <div class="row mb-2">
-            <div class="col-md-12">
-              <div class="card flex-md-row mb-4 box-shadow">
-                  {% for field in form %}
-                      <p>{{ field.label }}</p>
-                  {% endfor %}
-              </div>
-            </div>
-    </div>
+    <form method='POST'>
+    {% csrf_token %}
+      <div class="form-group">
+        <label for="exampleInputEmail1">{{ form.first_name.label }}</label>
+        <input type='text' class="form-control" placeholder="Imię" name="first_name">
+          <div class="invalid-feedback">
+          {{ form.first_name.errors }}
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">{{ form.email.label }}</label>
+        <input type="email" class="form-control" placeholder="Email" name="email">
+          <div class="invalid-feedback">
+          {{ form.email.errors }}
+          </div>
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="agreement">
+        <label class="form-check-label" for="exampleCheck1">{{ form.agreement.label }}</label>
+          <div class="invalid-feedback">
+          {{ form.agreement.errors }}
+          </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Zapisz się</button>
+    </form>
     {% endblock %}

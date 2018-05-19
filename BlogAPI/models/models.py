@@ -34,6 +34,14 @@ class Post(models.Model):
 
 class NewsletterParticipant(models.Model):
     first_name = models.CharField(blank=True, null=True, max_length=20)
-    email = models.EmailField(unique=True)
-    agreement = models.BooleanField(default=False)
-    create_time = models.DateTimeField(default=now())
+    email = models.EmailField(unique=True, error_messages={'required': 'To pole jest wymagane'})
+    agreement = models.BooleanField(default=False, error_messages={'required': 'Musisz wyrazić zgodę na przetwarzanie danych'})
+    create_time = models.DateTimeField(default=now(), null=True, blank=True)
+
+    class Meta:
+        ordering = ['-create_time']
+        verbose_name = 'Subskrybent'
+        verbose_name_plural = 'Subskrybenci'
+
+    def __str__(self):
+        return '{}'.format(self.email)

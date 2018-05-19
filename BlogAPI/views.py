@@ -1,7 +1,8 @@
 # coding=utf-8
-from django.views.generic import ListView, TemplateView, FormView
+from django.views.generic import ListView, TemplateView, CreateView
 from django.shortcuts import get_object_or_404
 from django.utils.timezone import now
+from django.urls import reverse_lazy, reverse
 
 from BlogAPI.models.models import Post, Tag
 from BlogAPI.forms import NewsletterForm
@@ -52,7 +53,8 @@ class TagSortingView(ListView):
         return Post.objects.filter(release_time__lte=now(), tags=tag)
 
 
-class NewsletterView(FormView):
+class NewsletterView(CreateView):
     name = 'newsletter-view'
     form_class = NewsletterForm
     template_name = 'newsletter.html'
+    success_url = reverse_lazy('index-view')
