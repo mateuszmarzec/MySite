@@ -30,3 +30,10 @@ class Post(models.Model):
 
     def __str__(self):
         return '{} {}'.format(self.title, self.slug)
+
+
+class NewsletterParticipant(models.Model):
+    first_name = models.CharField(blank=True, null=True, max_length=20)
+    email = models.EmailField(unique=True)
+    agreement = models.BooleanField(default=False)
+    create_time = models.DateTimeField(default=now())

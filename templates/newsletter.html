@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+    {% block title %}Newsletter{% endblock %}
+
+    {% block content %}
+    <div class="row mb-2">
+            <div class="col-md-12">
+              <div class="card flex-md-row mb-4 box-shadow">
+                  {% for field in form %}
+                      <p>{{ field.label }}</p>
+                  {% endfor %}
+              </div>
+            </div>
+    </div>
+    {% endblock %}

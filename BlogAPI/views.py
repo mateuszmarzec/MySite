@@ -1,9 +1,10 @@
 # coding=utf-8
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, FormView
 from django.shortcuts import get_object_or_404
 from django.utils.timezone import now
 
 from BlogAPI.models.models import Post, Tag
+from BlogAPI.forms import NewsletterForm
 
 
 class IndexView(TemplateView):
@@ -49,3 +50,9 @@ class TagSortingView(ListView):
     def get_queryset(self):
         tag = get_object_or_404(Tag, slug=self.kwargs.get('tag'))
         return Post.objects.filter(release_time__lte=now(), tags=tag)
+
+
+class NewsletterView(FormView):
+    name = 'newsletter-view'
+    form_class = NewsletterForm
+    template_name = 'newsletter.html'
