@@ -4,7 +4,11 @@
     <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-between">
                 {% for item in menu %}
-                <a class="p-2 text-muted" href="{% url item.view_name %}">{{ item.name }}</a>
+                    {% if item.view_name == view.name %}
+                        <a class="p-2 text-muted" style="text-decoration: underline" href="{% url item.view_name %}">{{ item.name }}</a>
+                        {% else %}
+                        <a class="p-2 text-muted" href="{% url item.view_name %}">{{ item.name }}</a>
+                    {% endif %}
                 {% endfor %}
                 <a class="p-2 text-muted" href="http://www.facebook.com">Facebook</a>
                 <a class="p-2 text-muted" href="http://www.twitter.com">Twitter</a>

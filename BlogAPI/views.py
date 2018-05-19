@@ -58,3 +58,6 @@ class NewsletterView(CreateView):
     form_class = NewsletterForm
     template_name = 'newsletter.html'
     success_url = reverse_lazy('index-view')
+
+    def form_invalid(self, form):
+        return super(NewsletterView, self).form_invalid(form)

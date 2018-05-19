@@ -8,23 +8,29 @@
         {% csrf_token %}
           <div class="form-group">
             <label for="exampleInputEmail1">{{ form.first_name.label }}</label>
-            <input type='text' class="form-control" placeholder="Imię" name="first_name">
+            <input type='text' class="form-control {% if form.first_name.errors %}is-invalid{% endif %}" placeholder="Imię" name="first_name">
               <div class="invalid-feedback">
-              {{ form.first_name.errors }}
+                  {% for error in form.first_name.errors %}
+                      {{ error }}
+                  {% endfor %}
               </div>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">{{ form.email.label }}</label>
-            <input type="email" class="form-control" placeholder="Email" name="email">
+            <input type="email" class="form-control {% if form.email.errors %}is-invalid{% endif %}" placeholder="Email" name="email">
               <div class="invalid-feedback">
-              {{ form.email.errors }}
+                  {% for error in form.email.errors %}
+                      {{ error }}
+                  {% endfor %}
               </div>
           </div>
           <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1" name="agreement">
-            <label class="form-check-label" for="exampleCheck1">{{ form.agreement.label }}</label>
+            <input type="checkbox" class="form-check-input {% if form.agreement.errors %}is-invalid{% endif %}" id="exampleCheck1" name="agreement">
+            <label class="form-check-label">{{ form.agreement.label }}</label>
               <div class="invalid-feedback">
-              {{ form.agreement.errors }}
+                  {% for error in form.agreement.errors %}
+                      {{ error }}
+                  {% endfor %}
               </div>
           </div>
             <hr class="mb-4">
