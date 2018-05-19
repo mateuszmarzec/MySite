@@ -1,11 +1,11 @@
 # coding=utf-8
-from django.views.generic import ListView, TemplateView, CreateView
 from django.shortcuts import get_object_or_404
+from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, TemplateView, CreateView
 
-from BlogAPI.models.models import Post, Tag
 from BlogAPI.forms import NewsletterForm
+from BlogAPI.models.models import Post, Tag
 
 
 class IndexView(TemplateView):
