@@ -19,10 +19,12 @@ class NewsletterForm(forms.ModelForm):
         labels = {
             'first_name': 'Imię',
             'email': 'Email',
-            'agreement': 'Wyrażam zgodę na przechowywanie wprowadzanych danych osobowych w celu wysyłania Newslettera',
+            'agreement': 'Wyrażam zgodę na przechowywanie wprowadzanych danych osobowych w celu wysyłania Newslettera.',
         }
         error_messages = {
-            'email': {'required': 'To pole jest wymagane'},
+            'email': {
+                'required': 'To pole jest wymagane.',
+            },
         }
         help_texts = {
             'first_name': 'Podanie imienia nie jest obowiązkowe.',
@@ -33,7 +35,7 @@ class NewsletterForm(forms.ModelForm):
         email = self.cleaned_data['email']
         try:
             NewsletterParticipant.objects.get(email=email)
-            raise forms.ValidationError('Ten email jest już zapisany na Newsletter')
+            raise forms.ValidationError('Ten email jest już zapisany na Newsletter.')
         except NewsletterParticipant.DoesNotExist:
             pass
         return email
@@ -41,5 +43,5 @@ class NewsletterForm(forms.ModelForm):
     def clean_agreement(self):
         agreement = self.cleaned_data['agreement']
         if not agreement:
-            raise forms.ValidationError('Musisz wyrazić zgodę na przetwarzanie danych')
+            raise forms.ValidationError('Musisz wyrazić zgodę na przetwarzanie danych.')
         return agreement
