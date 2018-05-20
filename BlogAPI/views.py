@@ -1,6 +1,7 @@
 # coding=utf-8
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
+from django.contrib import messages
 from django.utils.timezone import now
 from django.views.generic import ListView, TemplateView, CreateView
 
@@ -59,5 +60,6 @@ class NewsletterView(CreateView):
     template_name = 'newsletter.html'
     success_url = reverse_lazy('index-view')
 
-    def form_invalid(self, form):
-        return super(NewsletterView, self).form_invalid(form)
+    def form_valid(self, form):
+        messages.success(self.request, message='Udało Ci się zapisać na Newsletter!', extra_tags='Gratuluję. ')
+        return super(NewsletterView, self).form_valid(form)

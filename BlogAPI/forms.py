@@ -27,8 +27,11 @@ class NewsletterForm(forms.ModelForm):
 
     def clean_email(self):
         email = self.cleaned_data['email']
-        if NewsletterParticipant.objects.get(email=email):
+        try:
+            NewsletterParticipant.objects.get(email=email)
             raise forms.ValidationError('Ten email jest już zapisany na Newsletter')
+        except NewsletterParticipant.DoesNotExist:
+            pass
         return email
 
     def clean_agreement(self):
