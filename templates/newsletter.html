@@ -9,6 +9,7 @@
           <div class="form-group">
             <label for="exampleInputEmail1">{{ form.first_name.label }}</label>
             <input type='text' class="form-control {% if form.first_name.errors %}is-invalid{% endif %}" placeholder="Imię" name="first_name">
+              <small id="emailHelp" class="form-text text-muted">Podanie imienia nie jest obowiązkowe.</small>
               <div class="invalid-feedback">
                   {% for error in form.first_name.errors %}
                       {{ error }}
@@ -18,6 +19,7 @@
           <div class="form-group">
             <label for="exampleInputPassword1">{{ form.email.label }}</label>
             <input type="email" class="form-control {% if form.email.errors %}is-invalid{% endif %}" placeholder="Email" name="email">
+            <small id="emailHelp" class="form-text text-muted">Email na jakie wysyłany ma być Newsletter.</small>
               <div class="invalid-feedback">
                   {% for error in form.email.errors %}
                       {{ error }}
