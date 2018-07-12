@@ -3,6 +3,7 @@ from django.utils import timezone
 
 from BlogAPI.tests import factory
 from BlogAPI.models.models import Post
+from BlogAPI.forms import NewsletterForm
 
 
 class BaseTestCase(TestCase):
@@ -86,3 +87,38 @@ class TagSortingViewTestCase(IndexViewTestCase):
         self.assertQuerysetEqual(response.context['post_list'], [])
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, self.template)
+
+
+class NewsletterViewTestCase(BaseTestCase):
+    def test_get_form(self):
+        response = self.client.get('/newsletter')
+        self.assertTemplateUsed(response, 'newsletter.html')
+        self.assertEqual(response.status_code, 200)
+
+    def test_post_correct_data_with_name(self):
+        data = {
+            'first_name': 'TestName',
+            'email': 'test@test.com',
+            'agreement': True,
+        }
+        response = self.client.post(data=data, path='/newsletter')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+    def test_post_correct_data_without_name(self):
+        data = {
+            'email': 'test@test.com',
+            'agreement': True,
+        }
+        response = self.client.post(data=data, path='/newsletter')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/')
+
+    def test_post_incorrect_data_without_email(self):
+        form = NewsletterForm(data={
+            'first_name': 'TestName',
+            'agreement': True,
+        })
+        response = self.client.post(data=form.data, path='/newsletter')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'newsletter.html')
