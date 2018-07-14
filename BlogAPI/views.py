@@ -7,7 +7,6 @@ from django.views.generic import ListView, TemplateView, CreateView
 
 from BlogAPI.forms import NewsletterForm
 from BlogAPI.models.models import Post, Tag
-import BlogAPI.signals
 
 
 class IndexView(TemplateView):
