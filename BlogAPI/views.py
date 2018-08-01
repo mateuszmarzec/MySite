@@ -1,9 +1,11 @@
 # coding=utf-8
+
+from django.contrib import messages
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.contrib import messages
 from django.utils.timezone import now
-from django.views.generic import ListView, TemplateView, CreateView
+from django.views.generic import CreateView, ListView, TemplateView
 
 from BlogAPI.forms import NewsletterForm
 from BlogAPI.models.models import Post, Tag
@@ -42,7 +44,11 @@ class ArchiveView(ListView):
     template_name = 'List/index_list.html'
 
     def get_queryset(self):
-        return Post.objects.filter(release_time__lte=now())
+        queryset = Post.objects.filter(release_time__lte=now())
+        filter = self.request.GET.get('q')
+        if filter:
+            queryset = Post.objects.filter(Q(title__icontains=filter) | Q(text__icontains=filter))
+        return queryset
 
 
 class TagSortingView(ListView):
